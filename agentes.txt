@@ -1,0 +1,28 @@
+AGEETE CONSUMIDOR:
+
+
+consumo([])
+carteira (100)
+
++!estimar: consumo([L]) <- estimar (A);
+.send(tell, ...,vou_cons(A ou não A).
+
++consumo_mes<-Y = X + random; consumi(Y); .add(consulo[L],Y).
+
++conta(Mes,X): X<0 & carteira(Y) <- .print("i have to pay", X); !estimar.
+
++conta(Mes,X): X>0 & carteira(Y) <- .print("i win", X); !estimar.
+
+
+AGENTE REGULADOR:
+
+custo_dist(0,15);
+PLD(1000);
+mes(Mes)
+
++inf_ger(X,Consumidor): mes(Mes) = +energy(X,Mes,Consumidor).
+
+ 
++consumi(X)[source(Consumidor)]: energy(Y,Mes,Consumidor) & PLD(Z) <- .send(consumidor, tell, conta(Mes, (X-Y)*Z)).
+
+      

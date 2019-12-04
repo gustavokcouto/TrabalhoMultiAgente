@@ -1,0 +1,46 @@
+2 leiloes
+- CNP
+- PLD
+
+- agntess residenciais que compram demanda média;
+- agentes distribuidora também compra?
+- agentes residenciais devem presupor demanda média baseado num conhecimento prévio;
+- agentes geradores;
+- agentes geradores distribuídos;
+- agentes consumidores conservadores e expostos ao mercado;
+- agentes consumidores eco legaizinhos;
+
+
+
+1ª opção: todo mundo diz a demanda que precisa e se a concessionária comprar. Todos pagam em caso de multa ou compra em PLD.   
+
+2ª opção: todo mundo compra de quem quizes e cada um arca com os próprios custos.
+
+
+
+==> agente consumidor:
+estimar consumo e 
+- compra da concessionária.
+- verificar mercado para compra.
+- Compra também do gerador distribuído;
+escolher se compra ou não a energia antecipadamente e de qual geradora.
+verifica debitos e creditos;
+
+
+==> agente concessionária (cooperativa)
+0ª - verifica a demanda de todo mundo e decide de quais geradores comprar
+compra do PLD e distribuição prejuízos com os consumidores;
+1ª - verifica a demanda de todo mundo e decide de quais geradores comprar
+compra do PLD e cada consumidor arca com seu prejuizo;
+2º -  Apenas funciona como mercado e cobra apenas o uso da rede;
+
+==> agente gerador:
+ - gerador distribuído: decide o preço que vai vender; sempre distribui oque gera;
+ - gerador transmissão: decide o preço que vai vender; merdaco decide quem vai ser despachado;
+
+==> agente PLD:
+ - decide quem vai ser despachado em virtude dos custos e calcula PLD
+
+Artefato: - Medidor residêncial;
+	  - (despacho e PLD);
+	  - cobranças aos agentes;

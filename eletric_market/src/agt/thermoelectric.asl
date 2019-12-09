@@ -6,7 +6,14 @@ disp(_, 200).
 price(_, 100).
 type("Thermo").
 
++month(M) : M == 0 <-
+    .wait(200); //wait for clients to register cnp
+    !process_month(M).
+
 +month(M) <-
+    !process_month(M).
+
++!process_month(M) <-
     .print("Process month ", M);
     .df_search("consumidor_nacional", L);
     .print("send offer for energy to ", L);

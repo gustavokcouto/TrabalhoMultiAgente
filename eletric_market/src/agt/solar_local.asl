@@ -7,7 +7,14 @@ price(_, 30).
 type("Solar").
 cooperative(celesc).
 
++month(M) : M == 0 <-
+    .wait(200); //wait for clients to register cnp
+    !process_month(M).
+
 +month(M) <-
+    !process_month(M).
+
++!process_month(M) <-
     .print("Process month ", M);
     .df_search("consumidor_local", L);
     .print("send offer for energy to ", L);

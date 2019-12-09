@@ -1,10 +1,4 @@
-/* Initial goals */
-
-!register.
-
 /* Plans */
-
-+!register<- .df_register("consumidor_local").
 
 +pay_order(M, X) <-
     ?wallet(Y);

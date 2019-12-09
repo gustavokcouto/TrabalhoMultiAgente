@@ -8,6 +8,10 @@ wallet(10000).
 revenue(2000).
 cooperative(celesc).
 
+!register.
+
++!register<- .df_register("consumidor_local").
+
 +month(M): cons_reg(L) <-
 	!see_cons(M);
 	!estimate(M+1,L,0,0);
@@ -22,7 +26,7 @@ cooperative(celesc).
 +!estimate(M,[],A,N) <-
 	.my_name(Me);
 	//.print(Me, " estimate ", math.floor(A/N), " for month ", M);
-	.wait(100); // Let cooperative update the month and local prod send proposals
+	.wait(1000); // Let cooperative update the month and local prod send proposals
 	+need_energy(M, math.floor(A/N));
 	.print(Me, " need ", math.floor(A/N), " for month ", M);
 	.findall(offer(P, E, Ag), propose_local(Ag, M, E, P)[source(Ag)], L);
@@ -67,10 +71,13 @@ cooperative(celesc).
 	?need_energy(M, E);
 	-+need_energy(M, E-X).
 
-+!see_cons(M): cons_reg(L) <-D=math.floor(math.random(10))+30;
++!see_cons(M): cons_reg(L) & M > 0 <-
+	D = math.floor(math.random(10)) + 30;
 	-+cons_reg([D|L]);
 	.my_name(Me);
 	?cooperative(C);
 	.send(C,tell,consumi(Me, M, D)).
-	
+
++!see_cons(M).
+
 { include("client_common.asl") }

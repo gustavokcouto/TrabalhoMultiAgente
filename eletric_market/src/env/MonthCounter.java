@@ -4,7 +4,7 @@ import jason.asSyntax.Atom;
 import cartago.*;
 
 public class MonthCounter extends Artifact {
-    final static long TICK_TIME = 5000;
+    final static long TICK_TIME = 10000;
     void init(){
         defineObsProperty("month",0);
         execInternalOp("count");

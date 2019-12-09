@@ -3,7 +3,7 @@
 /* Initial beliefs and rules */
 
 disp(200).
-price(100).
+price(10).
 type("Thermo").
 
 /* Initial goals */
@@ -33,12 +33,13 @@ type("Thermo").
 
 @r1 +accept_proposal(CNPId,D)[source(A)]
    :  proposal(CNPId,C,D)
-   <-  .send(A,tell,delivered(De)).
+   <-  .print("contract done");
+   .send(A,tell,delivered(De)).
       // do the task and report to initiator
 	  
 @r3 +accept_proposal(CNPId,D)[source(A)]
-   :  proposal(CNPId,C,_)
-   <- //.print("cannot delivery ", CNPId); 
+   :  proposal(CNPId,C,Dem)
+   <- .print("Do not sell all of my power"); 
    .send(A,tell,delivered(D)).       // not do the task and report to initiator
    
 

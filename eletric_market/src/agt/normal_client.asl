@@ -11,12 +11,12 @@ wallet(1000).
 
 /* Plans */
 
-+!start : true <- .print("hello world.");
- !next_month.
++!start : true & .my_name(Ag) <- .print("hello world."); .send(celesc,tell,cust(Ag)).
+ //!next_month.
  
  +!next_month: cons_reg(L) <-!estimate(L,0,0). 
  
- +real_Cons<- !see_cons.
+ //+real_Cons<- !see_cons.
  
 
 +!estimate(L,A,N): .member(X,L)  <- .delete(0,L,W);  .wait(X);
@@ -25,16 +25,16 @@ wallet(1000).
 	C=N+1;
 	!estimate(W,B,C).
 
-+!estimate([],A,N)<- .print("I estimate", math.floor(A/N));
-	.send(celesc,tell,estimative(math.floor(A/N))).
++!estimate([],A,N): .my_name(Ag)<- .print("I estimate", math.floor(A/N));
+	.send(celesc,tell,estimative(math.floor(A/N),Ag)).
 	
-+!see_cons: cons_reg(L) <-X= math.floor(math.random(10))+30;
++!see_cons: cons_reg(L) & .my_name(Ag)<-X= math.floor(math.random(10))+30;
 	.wait(X);
-	.union([X],L,W);
-	.print(W);
+	.concat([X],L,W);
+	.print("nova lista de consumo", W);
 	-+cons_reg(W);
 	.print(X);
-	.send(celesc,tell,consumi(X)).
+	.send(celesc,tell,consumi(X,Ag)).
 	
 +pay(X)[source(A)]:wallet(Y)<- 
 //.print("I will pay ", X, " to electric market");

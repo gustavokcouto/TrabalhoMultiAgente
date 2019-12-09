@@ -3,56 +3,74 @@
 /* Initial beliefs and rules */
 
 cons_reg([30+math.floor(math.random(5)),32+math.floor(math.random(10)),33+math.floor(math.random(5))]).
-wallet(1000).
 
-/* Initial goals */
+wallet(10000).
+revenue(2000).
+cooperative(celesc).
 
-!start.
++month(M): cons_reg(L) <-
+	!see_cons(M);
+	!estimate(M+1,L,0,0);
+	!update_wallet.
 
-/* Plans */
++!update_wallet: wallet(X) & revenue(Y) <- 
+	-+wallet(X+Y).
 
-+!start : true <- .print("hello world.");
- !next_month.
- 
- +!next_month: cons_reg(L) <-!estimate(L,0,0). 
- 
- +real_Cons<- !see_cons.
- 
++!estimate(M,[X|L],A,N) <-
+	!estimate(M,L,A+X,N+1).
 
-+!estimate(L,A,N): .member(X,L)  <- .delete(0,L,W);  .wait(X);
-	//.print("estou aqui ", L);
-	B=A+ X;
-	C=N+1;
-	!estimate(W,B,C).
++!estimate(M,[],A,N) <-
+	.my_name(Me);
+	//.print(Me, " estimate ", math.floor(A/N), " for month ", M);
+	.wait(100); // Let cooperative update the month and local prod send proposals
+	+need_energy(M, math.floor(A/N));
+	.print(Me, " need ", math.floor(A/N), " for month ", M);
+	.findall(offer(P, E, Ag), propose_local(Ag, M, E, P)[source(Ag)], L);
+	.print("local offers ", L);
+	!buy_local(M, L);
+	!buy_cooperativa(M).
 
-+!estimate([],A,N)<- .print("I estimate", math.floor(A/N));
-	.send(celesc,tell,estimative(math.floor(A/N))).
++!buy_cooperativa(M) <-
+	?cooperative(C);
+	?need_energy(M, E);
+	.my_name(Me);
+	.print(Me, " bought ", E, " from cooperativa");
+	.send(C, tell, buy(Me, M, E)).
+
++!buy_local(M, []).
+
++!buy_local(M, L) <-
+    .min(L, offer(P, Of, Ag)); // sort offers, the first is the best
+	.delete(offer(P, Of, Ag), L, W);
+	?need_energy(M, E);
+	E > 0;
+	!buy_ag(M, E, Of, Ag);
+	!buy_local(M, W).
+
+-!buy_local(M, L).
+
++!buy_ag(M, E, Of, Ag) : E > Of <-
+	.my_name(Me);
+	.print(Me, " tries to buy ",  Of, " from ", Ag, " month ", M);
+	.send(Ag, tell, buy(Me, M, Of));
+	.wait(100).
+
++!buy_ag(M, E, Of, Ag) <-
+	.my_name(Me);
+	.print(Me, " tries to buy ",  E, " from ", Ag, " month ", M);
+	.send(Ag, tell, buy(Me, M, E));
+	.wait(100).
+
++buy_success(M, X) <-
+	.my_name(Me);
+	.print(Me, " bought ", X, " from local for month ", M);
+	?need_energy(M, E);
+	-+need_energy(M, E-X).
+
++!see_cons(M): cons_reg(L) <-D=math.floor(math.random(10))+30;
+	-+cons_reg([D|L]);
+	.my_name(Me);
+	?cooperative(C);
+	.send(C,tell,consumi(Me, M, D)).
 	
-+!see_cons: cons_reg(L) <-X= math.floor(math.random(10))+30;
-	.wait(X);
-	.union([X],L,W);
-	.print(W);
-	-+cons_reg(W);
-	.print(X);
-	.send(celesc,tell,consumi(X)).
-	
-+pay(X)[source(A)]:wallet(Y)<- 
-//.print("I will pay ", X, " to electric market");
-	-+wallet(Y-X);
-	.print("I have ", Y-X);
-	-pay(_)[source(A)];
- 	!next_month.
-
-+recieve(X):wallet(Y)<- 
-//.print("I recieve ", X, " from electric market");
-	-+wallet(X+Y);
-	.print("I have ", X+Y);
-	-recieve(_)[source(A)];
-	!next_month.
-
- 
-{ include("$jacamoJar/templates/common-cartago.asl") }
-{ include("$jacamoJar/templates/common-moise.asl") }
-
-// uncomment the include below to have an agent compliant with its organisation
-//{ include("$moiseJar/asl/org-obedient.asl") }
+{ include("client_common.asl") }

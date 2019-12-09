@@ -11,18 +11,23 @@
 //+month(M): dem(M, De) <-
     //.print("Demanda ", DeAg+De, " do mes ", M).
 
-+buy(Ag, M, DeAg)[source(Ag)]:dem(M, De) & month(M) & Md > M <- 
-	-+dem(Md, DeAg+De).
++buy(Ag, M, DeAg)[source(Ag)]: dem(M, De) & month(M) & Md > M <- 
+	-+dem(Md, DeAg+De);
+	!buy_energy(Md).
 
 +buy(Ag, Md, De)[source(Ag)] : month(M) & Md > M <- 
-	+dem(Md, De).
+	+dem(Md, De);
+	!buy_energy(Md).
 
 +buy(Ag, Md, De)[source(Ag)] <- 
 	-buy(Ag, Md, De).
 
-+dem(M, De) <-
++!buy_energy(M) <-
+	.wait(1000); // Give some time to receive offers
 	.findall(offer(P, E, Ag), propose_local(Ag, M, E, P)[source(Ag)], L);
-	.print("local offers ", L);
+	.print("Month ", M, " local offers ", L);
+	?dem(M, D);
+	.print("Month ", M, " demand ", D);
 	!buy_nacional(M, L).
 
 +!buy_nacional(M, []).
@@ -48,6 +53,12 @@
 	.print(Me, " tries to buy ",  E, " from ", Ag, " month ", M);
 	.send(Ag, tell, buy(Me, M, E));
 	.wait(100).
+
++buy_success(M, X)[source(Ag)] <-
+	.my_name(Me);
+	.print(Me, " bought ", X, " from ", Ag, " for month ", M);
+	?dem(M, E);
+	-+dem(M, E-X).
 
 +consumi(Ag, M, X)[source(A)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & local_sold(Ag, M, E) & D + E < X <-
     .print(Ag, ", you consumed ", X, " bought ", E, " from local market and ", D, " from national market at month ", M);

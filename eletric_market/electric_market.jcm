@@ -13,16 +13,16 @@
 */
 
 mas electric_market {
-    // agent bob:sample_agent.asl
-    agent celesc:company.asl
+    agent celesc:celesc.asl
     agent bob:normal_client.asl
-    agent mariazinha:normal_client.asl
-    agent joaozin:normal_client.asl
+    agent solar:solar_local.asl
+    // agent mariazinha:normal_client.asl
+    // agent joaozin:normal_client.asl
     agent itaipu:hydroelectric.asl
-    agent jorgeLacerda:thermoelectric.asl
+    // agent jorgeLacerda:thermoelectric.asl
     workspace simulation {
-        artifact counter1 : electric_market.MonthCounter() {
-            focused-by: celesc, bob, mariazinha, joaozin, itaipu, jorgeLacerda
+        artifact counter1 : electric_market.CameraComercio() {
+            focused-by: celesc, bob, solar, mariazinha, joaozin, itaipu, jorgeLacerda
         }
     }
 }

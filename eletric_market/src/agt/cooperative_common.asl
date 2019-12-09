@@ -49,6 +49,12 @@
 	.send(Ag, tell, buy(Me, M, E));
 	.wait(100).
 
++buy_success(M, X)[source(Ag)] <-
+	.my_name(Me);
+	.print(Me, " bought ", X, " from ", Ag, " for month ", M);
+	?dem(M, E);
+	-+dem(M, E-X).
+
 +consumi(Ag, M, X)[source(A)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & local_sold(Ag, M, E) & D + E < X <-
     .print(Ag, ", you consumed ", X, " bought ", E, " from local market and ", D, " from national market at month ", M);
 	.print(Ag, ", you have to  pay ", (X - D - E) * PLD, " at month ", M);

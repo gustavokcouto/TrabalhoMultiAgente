@@ -19,7 +19,7 @@ mas electric_market {
     // agent mariazinha:normal_client.asl
     // agent joaozin:normal_client.asl
     agent itaipu:hydroelectric.asl
-    // agent jorgeLacerda:thermoelectric.asl
+    agent jorgeLacerda:thermoelectric.asl
     workspace simulation {
         artifact counter1 : electric_market.CameraComercio() {
             focused-by: celesc, bob, solar, mariazinha, joaozin, itaipu, jorgeLacerda

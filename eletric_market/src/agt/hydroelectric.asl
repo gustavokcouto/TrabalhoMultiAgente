@@ -2,18 +2,9 @@
 
 /* Initial beliefs and rules */
 
-disp(50).
-price(30).
-type("Hydro").
-
-// Agent solar local in project electric_market
-
-/* Initial beliefs and rules */
-
-disp(_, 20).
+disp(_, 10).
 price(_, 30).
-type("Solar").
-cooperative(celesc).
+type("Hydro").
 
 +month(M) <-
     .print("Process month ", M);

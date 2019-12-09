@@ -18,7 +18,7 @@ mas electric_market {
     agent solar:solar_local.asl
     // agent mariazinha:normal_client.asl
     // agent joaozin:normal_client.asl
-    // agent itaipu:hydroelectric.asl
+    agent itaipu:hydroelectric.asl
     // agent jorgeLacerda:thermoelectric.asl
     workspace simulation {
         artifact counter1 : electric_market.CameraComercio() {

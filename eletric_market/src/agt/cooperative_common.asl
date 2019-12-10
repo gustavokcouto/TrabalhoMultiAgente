@@ -1,5 +1,7 @@
 /* Initial beliefs and rules */
 
+price(_, 100).
+
 /* Initial goals */
 
 !register.
@@ -8,17 +10,19 @@
 
 +!register<- .df_register("consumidor_nacional").
 
-+buy(Ag, Md, DeAg)[source(Ag)]: dem(Md, De) & month(M) & Md > M <- 
++buy(Ag, Md, P, DeAg)[source(Ag)]: dem(Md, De) & month(M) & Md > M <- 
 	-dem(Md, De);
 	+dem(Md, DeAg+De);
+	.send(Ag, tell, buy_success(Md, P, DeAg));
 	!buy_energy(Md).
 
-+buy(Ag, Md, De)[source(Ag)] : month(M) & Md > M <- 
++buy(Ag, Md, P, De)[source(Ag)] : month(M) & Md > M <- 
 	+dem(Md, De);
+	.send(Ag, tell, buy_success(Md, P, De));
 	!buy_energy(Md).
 
-+buy(Ag, Md, De)[source(Ag)] <- 
-	-buy(Ag, Md, De).
++buy(Ag, Md, P, De)[source(Ag)] <- 
+	-buy(Ag, Md, P, De).
 
 +!buy_energy(M) : not .intend(buy_energy(_)) <-
 	.wait(1000); // Give some time to receive offers
@@ -37,26 +41,27 @@
 	.delete(offer(P, Of, Ag), L, W);
 	?dem(M, E);
 	E > 0;
-	!buy_ag(M, E, Of, Ag);
+	!buy_ag(M, P, E, Of, Ag);
 	!buy_nacional(M, W).
 
 -!buy_nacional(M, L).
 
-+!buy_ag(M, E, Of, Ag) : E > Of <-
++!buy_ag(M, P, E, Of, Ag) : E > Of <-
 	.my_name(Me);
 	.print(Me, " tries to buy ",  Of, " from ", Ag, " month ", M);
-	.send(Ag, tell, buy(Me, M, Of));
+	.send(Ag, tell, buy(Me, M, P, Of));
 	.wait(50).
 
-+!buy_ag(M, E, Of, Ag) <-
++!buy_ag(M, P, E, Of, Ag) <-
 	.my_name(Me);
 	.print(Me, " tries to buy ",  E, " from ", Ag, " month ", M);
-	.send(Ag, tell, buy(Me, M, E));
+	.send(Ag, tell, buy(Me, M, P, E));
 	.wait(50).
 
-+buy_success(M, X)[source(Ag)] <-
++buy_success(M, P, X)[source(Ag)] <-
 	.my_name(Me);
-	.print(Me, " bought ", X, " from ", Ag, " for month ", M);
+	?month(Md);
+	.print(Me, " bought ", X, " for price ", P, " from ", Ag," for month ", M, " in month ", Md);
 	?dem(M, E);
 	-dem(M, E);
 	+dem(M, E-X).

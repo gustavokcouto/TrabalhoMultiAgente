@@ -8,32 +8,29 @@
 
 +!register<- .df_register("gerador_local").
 
-+buy(Ag, M, De)[source(Ag)] : available(M, E) & E > De <-
++buy(Ag, M, P, De)[source(Ag)] : available(M, E) & E > De <-
     -+available(M, E - De);
-    !sold(Ag, M, De).
+    !sold(Ag, M, P, De).
 
-+buy(Ag, M, De)[source(Ag)] : available(M, E) & E > 0 <-
++buy(Ag, M, P, De)[source(Ag)] : available(M, E) & E > 0 <-
     -+available(M, 0);
-    !sold(Ag, M, E).
+    !sold(Ag, M, P, E).
 
-+buy(Ag, M, De)[source(Ag)] : available(M, E) <-
++buy(Ag, M, P, De)[source(Ag)] : available(M, E) <-
     !sell_fail(Ag, M).
 
-+buy(Ag, M, De)[source(Ag)] : disp(M, E) & E > De <-
++buy(Ag, M, P, De)[source(Ag)] : disp(M, E) & E > De <-
     +available(M, E - De);
-    !sold(Ag, M, De).
+    !sold(Ag, M, P, De).
 
-+buy(Ag, M, De)[source(Ag)] : disp(M, E) & E > 0<-
++buy(Ag, M, P, De)[source(Ag)] : disp(M, E) & E > 0<-
     +available(M, 0);
-    !sold(Ag, M, E).
+    !sold(Ag, M, P, E).
 
-+buy(Ag, M, De)[source(Ag)] : disp(M, E) & E > 0<-
-    !sell_fail(Ag, M).
-
-+!sold(Ag, M, E) <-
++!sold(Ag, M, P, E) <-
     .my_name(Me);
     .print(Me, " sold ", E, " to agent ", Ag, " in month ", M);
-    .send(Ag, tell, buy_success(M, E));
+    .send(Ag, tell, buy_success(M, P, E));
     ?cooperative(C);
     .send(C, tell, cnp_report(Me, Ag, M, E)).
 

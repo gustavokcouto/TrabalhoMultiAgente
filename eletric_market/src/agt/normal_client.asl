@@ -37,8 +37,10 @@ cooperative(celesc).
 +!buy_cooperativa(M) : need_energy(M, E) & E > 0 <-
 	?cooperative(C);
 	.my_name(Me);
-	.print(Me, " bought ", E, " from cooperativa");
-	.send(C, tell, buy(Me, M, E)).
+	.send(C, askOne, price(M, P), Pa);
+	price(M, Pc) = Pa;
+	.print(C, " price is ", Pc);
+	.send(C, tell, buy(Me, M, Pc, E)).
 
 +!buy_cooperativa(M).
 
@@ -49,26 +51,39 @@ cooperative(celesc).
 	.delete(offer(P, Of, Ag), L, W);
 	?need_energy(M, E);
 	E > 0;
-	!buy_ag(M, E, Of, Ag);
+	!buy_ag(M, P, E, Of, Ag);
 	!buy_local(M, W).
 
 -!buy_local(M, L).
 
-+!buy_ag(M, E, Of, Ag) : E > Of <-
++!buy_ag(M, P, E, Of, Ag) : E > Of <-
 	.my_name(Me);
-	.print(Me, " tries to buy ",  Of, " from ", Ag, " month ", M);
-	.send(Ag, tell, buy(Me, M, Of));
+	//.print(Me, " tries to buy ",  Of, " from ", Ag, " month ", M);
+	.send(Ag, tell, buy(Me, M, P, Of));
 	.wait(100).
 
-+!buy_ag(M, E, Of, Ag) <-
++!buy_ag(M, P, E, Of, Ag) <-
 	.my_name(Me);
-	.print(Me, " tries to buy ",  E, " from ", Ag, " month ", M);
-	.send(Ag, tell, buy(Me, M, E));
+	//.print(Me, " tries to buy ",  E, " from ", Ag, " month ", M);
+	.send(Ag, tell, buy(Me, M, P, E));
 	.wait(100).
 
-+buy_success(M, X)[source(Ag)] <-
++buy_success(M, P, X)[source(C)] : cooperative(C) <-
 	.my_name(Me);
-	.print(Me, " bought ", X, " from ", Ag," for month ", M);
+	?month(Md);
+	.print(Me, " bought ", X, " for price ", P, " from ", C," for month ", M, " in month ", Md).
+
++buy_success(M, P, X)[source(Ag)] <-
+	.my_name(Me);
+	?month(Md);
+	.print(Me, " bought ", X, " for price ", P, " from ", Ag," for month ", M, " in month ", Md);
+	?need_energy(M, E);
+	-+need_energy(M, E-X).
+
++buy_success(M, P, X)[source(Ag)] <-
+	.my_name(Me);
+	?month(Md);
+	.print(Me, " bought ", X, " for price ", P, " from ", Ag," for month ", M, " in month ", Md);
 	?need_energy(M, E);
 	-+need_energy(M, E-X).
 

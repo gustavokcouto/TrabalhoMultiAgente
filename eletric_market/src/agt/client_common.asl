@@ -1,5 +1,6 @@
 /* Plans */
 
+/*
 +pay_order(M, X) <-
     ?wallet(Y);
     .my_name(Me);
@@ -15,7 +16,7 @@
 	-+wallet(X+Y);
 	//.print(Me, " has ", Y-X);
     -receive(M, X).
- 
+*/
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }
 

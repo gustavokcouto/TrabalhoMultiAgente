@@ -13,7 +13,7 @@ type("Thermo").
 +month(M) <-
     !process_month(M).
 
-+!process_month(M) : M < 12 <-
++!process_month(M) <-
     .print("Process month ", M);
     .df_search("consumidor_nacional", L);
     .print("send offer for energy to ", L);

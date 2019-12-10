@@ -7,7 +7,7 @@ public class CameraComercio extends Artifact {
     final static long TICK_TIME = 5000;
     void init(){
         defineObsProperty("month", 0);
-        defineObsProperty("pld", 50);
+        defineObsProperty("pld", Math.floor( 30 + 70 * Math.random()));
         execInternalOp("count");
     }
     @INTERNAL_OPERATION void count(){
@@ -23,7 +23,7 @@ public class CameraComercio extends Artifact {
             }
             
             prop  = getObsProperty("pld");
-            prop.updateValue(50 + Math.floor(50 * Math.random()));
+            prop.updateValue(Math.floor( 30 + 70 * Math.random()));
         }
     }
 }

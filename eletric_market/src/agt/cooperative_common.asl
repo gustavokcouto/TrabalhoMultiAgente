@@ -139,7 +139,6 @@ price(_, 100).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, P, D)[source(Ag)] & D==X <- 
     .print(Ag, ", you consumed ", X, " bought ", D, " from national market at month ", M);
-	.send(Ag, tell, buy_success(M, Pn, D));
 	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) <-

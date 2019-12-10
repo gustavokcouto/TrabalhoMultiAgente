@@ -72,9 +72,7 @@ pld_bill([]).
 +!buy_cooperativa(M) : need_energy(M, E) & E > 0 <-
 	?cooperative(C);
 	.my_name(Me);
-	.send(C, askOne, price(M, P), Pa);
-	price(M, Pc) = Pa;
-	.print(C, " price is ", Pc);
+	?pld(Pc);
 	.send(C, tell, buy(Me, M, Pc, E)).
 
 +!buy_cooperativa(M).
@@ -113,8 +111,19 @@ pld_bill([]).
 
 +buy_success(M, P, X)[source(Ag)] <-
 	?general_bill(B);
-	.concat(B, [P * X], NB);
-	-+general_bill(NB);
+	.length(B, LB);
+	
+	if ( LB < M ) {
+		.concat(B, [P * X], NB);
+		-+general_bill(NB);
+	} else {
+		.reverse(B, RB);
+		-+general_bill(RB);
+		?general_bill([FRB | RRB]);
+		.reverse(RRB, RRRB);
+		.concat(RRRB, [FRB + P * M], NB);
+		-+general_bill(NB);
+	}
 	.my_name(Me);
 	?month(Md);
 	.print(Me, " bought ", X, " for price ", P, " from ", Ag," for month ", M, " in month ", Md);

@@ -35,7 +35,7 @@
     .print(Me, " sold ", E, " to agent ", Ag, " in month ", M);
     .send(Ag, tell, buy_success(M, E));
     ?cooperative(C);
-    .send(C, tell, local_sold(Me, Ag, M, E)).
+    .send(C, tell, cnp_report(Me, Ag, M, E)).
 
 +!sell_fail(Ag, M) <-
     .my_name(Me);

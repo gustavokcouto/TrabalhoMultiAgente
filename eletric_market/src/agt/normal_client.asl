@@ -14,7 +14,7 @@ pld_bill([]).
 
 
 +!register <-
-	!predict
+	!predict;	
 	.df_register("consumidor_local").
 
 +!predict <-
@@ -37,8 +37,9 @@ pld_bill([]).
 	+estimative(E).
 
 +!estimative_calculation(E, D, I) <-
+	?variance(V);
 	.nth(I, D, DI);
-	.concat(E, [DI + math.random(50)], EO);
+	.concat(E, [DI +  V * math.random(50)], EO);
 	IO = I + 1;
 	!estimative_calculation(EO, D, IO).
 

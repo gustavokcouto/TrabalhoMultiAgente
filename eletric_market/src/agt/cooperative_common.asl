@@ -13,12 +13,10 @@ price(_, 100).
 +buy(Ag, Md, P, DeAg)[source(Ag)]: dem(Md, De) & month(M) & Md > M <- 
 	-dem(Md, De);
 	+dem(Md, DeAg+De);
-	.send(Ag, tell, buy_success(Md, P, DeAg));
 	!buy_energy(Md).
 
 +buy(Ag, Md, P, De)[source(Ag)] : month(M) & Md > M <- 
 	+dem(Md, De);
-	.send(Ag, tell, buy_success(Md, P, De));
 	!buy_energy(Md).
 
 +buy(Ag, Md, P, De)[source(Ag)] <- 
@@ -65,7 +63,15 @@ price(_, 100).
 	?dem(M, E);
 	-dem(M, E);
 	+dem(M, E-X).
+/*	!insert_total(M, X, X*P).
 
++!insert_total(M, Ep, Cp) : total_cost(M, E, C) <-
+	-total_cost(M, E, C);
+	+total_cost(M, E+Ep, C+Cp).
+
++!insert_total(M, Ep, Cp) <-
+	+total_cost(M, Ep, Cp).
+*/
 +cnp_report(Ag, Ac, M, E)[source(Ag)] : buy_report(Ac, M, Ec) & sell_report(Ag, M, Es)<-
 	//.print(Ac, " bought ", E, " from ", Ag, " at month ", M);
 	-sell_report(Ag, M, Es);
@@ -93,15 +99,18 @@ price(_, 100).
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & buy_report(Ag, M, E) & D + E < X <-
     .print(Ag, ", you consumed ", X, " bought ", E, " from local market and ", D, " from national market at month ", M);
 	.print(Ag, ", you have to  pay ", (X - D - E) * PLD, " at month ", M);
-	.send(Ag, tell, pay_order(M, (X - D - E) * PLD)).
+	.send(Ag, tell, pay_order(M, (X - D - E) * PLD));
+	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & buy_report(Ag, M, E) & D + E > X <- 
     .print(Ag, ", you consumed ", X, " bought ", E, " from local market and ", D, " from national market at month ", M);
     .print(Ag, ", you will receive ", (D + E - X) * PLD, " at month ", M);
-	.send(Ag, tell, receive(M, (D + E - X) * PLD)).
+	.send(Ag, tell, receive(M, (D + E - X) * PLD));
+	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & buy_report(Ag, M, E) & D + E == X <- 
-    .print(Ag, ", you consumed ", X, " bought ", E, " from local market and ", D, " from national market at month ", M).
+    .print(Ag, ", you consumed ", X, " bought ", E, " from local market and ", D, " from national market at month ", M);
+	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy_report(Ag, M, E) & E < X <-
     .print(Ag, ", you consumed ", X, " bought ", E, " from local market at month ", M);
@@ -119,15 +128,19 @@ price(_, 100).
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & D<X <-
     .print(Ag, ", you consumed ", X, " bought ", D, " from national market at month ", M);
     .print(Ag, ", you have to  pay ", (X - D) * PLD, " at month ", M);
-	.send(Ag, tell, pay_order(M, (X - D) * PLD)).
+	.send(Ag, tell, pay_order(M, (X - D) * PLD));
+	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & D>X <- 
     .print(Ag, ", you consumed ", X, " bought ", D, " from national market at month ", M);
     .print(Ag, ", you will receive ", (D - X) * PLD, " at month ", M);
-	.send(Ag, tell, receive(M, (D - X) * PLD)).
+	.send(Ag, tell, receive(M, (D - X) * PLD));
+	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, D)[source(Ag)] & D==X <- 
-    .print(Ag, ", you consumed ", X, " bought ", D, " from national market at month ", M).
+    .print(Ag, ", you consumed ", X, " bought ", D, " from national market at month ", M);
+	.send(Ag, tell, buy_success(M, Pn, D));
+	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) <-
     .print(Ag, ", you consumed ", X);
@@ -144,6 +157,11 @@ price(_, 100).
 +produzi(Ag, M, Ep)[source(Ag)]: month(M) <-
 	.print(Ag, ", you generated ", Ep, " at month ", M);
 	.send(Ag, tell, receive(M, Ep * PLD)).
+
++!send_consumer_bill(Ag, M, D).
+	//?total_cost(M, En, Cn);
+	//Pn = math.floor(En/Cn);
+	//.send(Ag, tell, buy_success(M, Pn, D)).
 
 { include("$jacamoJar/templates/common-cartago.asl") }
 { include("$jacamoJar/templates/common-moise.asl") }

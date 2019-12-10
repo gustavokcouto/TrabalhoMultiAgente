@@ -25,7 +25,7 @@ mas electric_market {
         focus: simulation.counter
     }
     agent eolica:eolica_local.asl {
-        instances: 5
+        instances: 0
         focus: simulation.counter
     }
     agent hydroelectric {

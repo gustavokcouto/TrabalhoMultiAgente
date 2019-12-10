@@ -34,12 +34,13 @@ cooperative(celesc).
 	!buy_local(M, L);
 	!buy_cooperativa(M).
 
-+!buy_cooperativa(M) <-
++!buy_cooperativa(M) : need_energy(M, E) & E > 0 <-
 	?cooperative(C);
-	?need_energy(M, E);
 	.my_name(Me);
 	.print(Me, " bought ", E, " from cooperativa");
 	.send(C, tell, buy(Me, M, E)).
+
++!buy_cooperativa(M).
 
 +!buy_local(M, []).
 
@@ -65,9 +66,9 @@ cooperative(celesc).
 	.send(Ag, tell, buy(Me, M, E));
 	.wait(100).
 
-+buy_success(M, X) <-
++buy_success(M, X)[source(Ag)] <-
 	.my_name(Me);
-	.print(Me, " bought ", X, " from local for month ", M);
+	.print(Me, " bought ", X, " from ", Ag," for month ", M);
 	?need_energy(M, E);
 	-+need_energy(M, E-X).
 

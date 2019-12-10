@@ -13,17 +13,31 @@
 */
 
 mas electric_market {
-    agent celesc:celesc.asl
-    agent bob:normal_client.asl
-    agent solar:solar_local.asl
-    // agent mariazinha:normal_client.asl
-    // agent joaozin:normal_client.asl
-    agent itaipu:hydroelectric.asl
-    agent jorgeLacerda:thermoelectric.asl
+    agent celesc:celesc.asl {
+        focus: simulation.counter1
+    }
+    agent normal_client {
+        instances: 10
+        focus: simulation.counter1
+    }
+    agent solar:solar_local.asl {
+        instances: 5
+        focus: simulation.counter1
+    }
+    agent eolica:eolica_local.asl {
+        instances: 5
+        focus: simulation.counter1
+    }
+    agent hydroelectric {
+        instances: 5
+        focus: simulation.counter1
+    }
+    agent thermoelectric {
+        instances: 2
+        focus: simulation.counter1
+    }
     workspace simulation {
-        artifact counter1 : electric_market.CameraComercio() {
-            focused-by: celesc, bob, solar, mariazinha, joaozin, itaipu, jorgeLacerda
-        }
+        artifact counter1 : electric_market.CameraComercio()
     }
 }
 

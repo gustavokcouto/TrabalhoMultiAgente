@@ -3,9 +3,9 @@
 /* Initial beliefs and rules */
 
 disp(_, 50).
-price(_, 30).
+price(_, 40).
 produzi(_, 40).
-type("Solar").
+type("Eolica").
 cooperative(celesc).
 
 +month(M) : M == 0 <-

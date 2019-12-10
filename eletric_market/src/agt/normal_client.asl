@@ -24,9 +24,7 @@ pld_bill([]).
 	!demand_calculation(D);
 	?demand(DO);
 	E = [];
-	!estimative_calculation(E, DO, 0);
-	?estimative(EO);
-	+estimative(E).
+	!estimative_calculation(E, DO, 0).
 
 +!demand_calculation(D) : .length(D, L) & L > 12 <-
 	+demand(D).
@@ -53,15 +51,13 @@ pld_bill([]).
 +!update_wallet: wallet(X) & revenue(Y) <- 
 	-+wallet(X+Y).
 
-+!estimate(M,[X|L],A,N) : M <= 12 <-
-	!estimate(M,L,A+X,N+1).
-
 +!estimate(M,[],A,N) : M <= 12 <-
 	.my_name(Me);
-	//.print(Me, " estimate ", math.floor(A/N), " for month ", M);
 	.wait(1000); // Let cooperative update the month and local prod send proposals
-	+need_energy(M, math.floor(A/N));
-	.print(Me, " need ", math.floor(A/N), " for month ", M);
+	?estimative(E);
+	.nth(M-1, E, EM); 
+	+need_energy(M, EM);
+	.print(Me, " need ", EM, " for month ", M);
 	.findall(offer(P, E, Ag), propose_local(Ag, M, E, P)[source(Ag)], L);
 	.print("local offers ", L);
 	!buy_local(M, L);
@@ -123,11 +119,12 @@ pld_bill([]).
 
 
 +!see_cons(M): cons_reg(L) & M > 0 <-
-	D = math.floor(math.random(10)) + 30;
-	-+cons_reg([D|L]);
+	?demand(D);
+	.nth(M-1, D, DM);
+	-+cons_reg([DM|L]);
 	.my_name(Me);
 	?cooperative(C);
-	.send(C,tell,consumi(Me, M, D)).
+	.send(C,tell,consumi(Me, M, DM)).
 
 +!see_cons(M).
 

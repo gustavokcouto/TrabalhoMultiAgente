@@ -12,11 +12,11 @@ public class CameraComercio extends Artifact {
     }
     @INTERNAL_OPERATION void count(){
         while(true){
+            await_time(TICK_TIME);
             ObsProperty prop  = getObsProperty("month");
             prop.updateValue(prop.intValue()+1);
             prop  = getObsProperty("pld");
             prop.updateValue(50 + Math.floor(50 * Math.random()));
-            await_time(TICK_TIME);
         }
     }
 }

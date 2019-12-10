@@ -28,4 +28,6 @@ cooperative(celesc).
     .my_name(Me);
     .send(L, tell, propose_local(Me, M+1, E, P)).
 
++!process_month(M).
+
 { include("ger_local_common.asl") }

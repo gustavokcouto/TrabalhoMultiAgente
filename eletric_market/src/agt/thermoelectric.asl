@@ -22,4 +22,6 @@ type("Thermo").
     .my_name(Me);
     .send(L, tell, propose_nacional(Me, M+1, E, P)).
 
++!process_month(M).
+
 { include("ger_nacional_common.asl") }

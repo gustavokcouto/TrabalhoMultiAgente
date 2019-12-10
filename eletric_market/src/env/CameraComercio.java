@@ -14,7 +14,13 @@ public class CameraComercio extends Artifact {
         while(true){
             await_time(TICK_TIME);
             ObsProperty prop  = getObsProperty("month");
-            prop.updateValue(prop.intValue()+1);
+
+            if (prop.intValue() < 12) {
+                prop.updateValue(prop.intValue()+1);
+            } else {
+                signal("end_of_year");
+            }
+            
             prop  = getObsProperty("pld");
             prop.updateValue(50 + Math.floor(50 * Math.random()));
         }

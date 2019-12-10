@@ -14,30 +14,30 @@
 
 mas electric_market {
     agent celesc:celesc.asl {
-        focus: simulation.counter1
+        focus: simulation.counter
     }
     agent normal_client {
         instances: 10
-        focus: simulation.counter1
+        focus: simulation.counter
     }
     agent solar:solar_local.asl {
-        instances: 5
-        focus: simulation.counter1
+        instances: 2
+        focus: simulation.counter
     }
     agent eolica:eolica_local.asl {
-        instances: 5
-        focus: simulation.counter1
+        instances: 2
+        focus: simulation.counter
     }
     agent hydroelectric {
         instances: 5
-        focus: simulation.counter1
+        focus: simulation.counter
     }
     agent thermoelectric {
         instances: 2
-        focus: simulation.counter1
+        focus: simulation.counter
     }
     workspace simulation {
-        artifact counter1 : electric_market.CameraComercio()
+        artifact counter : electric_market.CameraComercio()
     }
 }
 

@@ -17,7 +17,6 @@ public class CameraComercio extends Artifact {
 
             if (prop.intValue() < 12) {
                 prop.updateValue(prop.intValue()+1);
-               
             } else {
                 signal("end_of_year");
             }

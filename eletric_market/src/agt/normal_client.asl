@@ -13,7 +13,7 @@ bill([]).
 
 +!register<- .df_register("consumidor_local").
 
-+month(M): cons_reg(L) & M < 12 <-
++month(M): cons_reg(L) <-
 	!see_cons(M);
 	!estimate(M+1,L,0,0);
 	!update_wallet.
@@ -87,7 +87,7 @@ bill([]).
 	.concat(B, [P], NB);
 	-+bill(NB).
 
-+end_of_year : true <-
-	.print("Cheguei aqui").
++end_of_year : bill(B) & .my_name(Me) <-
+	.print(Me, "my bill was: ", B).
 
 { include("client_common.asl") }

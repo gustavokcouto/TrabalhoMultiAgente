@@ -13,7 +13,7 @@ type("Hydro").
 +month(M) <-
     !process_month(M).
 
-+!process_month(M) <-
++!process_month(M) : M < 12 <-
     .print("Process month ", M);
     .df_search("consumidor_nacional", L);
     .print("send offer for energy to ", L);
@@ -21,5 +21,7 @@ type("Hydro").
     ?price(M+1, P);
     .my_name(Me);
     .send(L, tell, propose_nacional(Me, M+1, E, P)).
+
++!process_month(M).
 
 { include("ger_nacional_common.asl") }

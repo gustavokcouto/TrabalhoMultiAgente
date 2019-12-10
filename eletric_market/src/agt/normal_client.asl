@@ -7,12 +7,13 @@ cons_reg([30+math.floor(math.random(5)),32+math.floor(math.random(10)),33+math.f
 wallet(10000).
 revenue(2000).
 cooperative(celesc).
+bill([]).
 
 !register.
 
 +!register<- .df_register("consumidor_local").
 
-+month(M): cons_reg(L) <-
++month(M): cons_reg(L) & M < 12 <-
 	!see_cons(M);
 	!estimate(M+1,L,0,0);
 	!update_wallet.
@@ -80,5 +81,13 @@ cooperative(celesc).
 	.send(C,tell,consumi(Me, M, D)).
 
 +!see_cons(M).
+
++receive(M, P)[source(_)] <-
+	?bill(B);
+	.concat(B, [P], NB);
+	-+bill(NB).
+
++end_of_year : true <-
+	.print("Cheguei aqui").
 
 { include("client_common.asl") }

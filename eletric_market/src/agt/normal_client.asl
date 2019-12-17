@@ -103,8 +103,19 @@ pld_bill([]).
 
 +buy_success(M, P, X)[source(C)] : cooperative(C) <-
 	?general_bill(B);
-	.concat(B, [P * X], NB);
-	-+general_bill(NB);
+	.length(B, LB);
+	
+	if ( LB < M ) {
+		.concat(B, [P * X], NB);
+		-+general_bill(NB);
+	} else {
+		.reverse(B, RB);
+		-+general_bill(RB);
+		?general_bill([FRB | RRB]);
+		.reverse(RRB, RRRB);
+		.concat(RRRB, [FRB + P * M], NB);
+		-+general_bill(NB);
+	}
 	.my_name(Me);
 	?month(Md);
 	.print(Me, " bought ", X, " for price ", P, " from ", C," for month ", M, " in month ", Md).
@@ -140,15 +151,26 @@ pld_bill([]).
 
 +!see_cons(M).
 
-+pay_order(M, P)[source(_)] <-
++pay_order(M, P)[source(_)] : pld(PLD) & demand(D) <-
 	?pld_bill(B);
 	.concat(B, [-P], NB);
+
+	.nth(M-1, D, DM);
+	if ( PLD * DM == P ) {
+		+buy_fail(M);
+	};
+
 	-+pld_bill(NB).
 
 +receive(M, P)[source(_)] <-
 	?pld_bill(B);
 	.concat(B, [P], NB);
 	-+pld_bill(NB).
+
++buy_fail(M) : month(Md) <-
+	?general_bill(B);
+	.concat(B, [0], NB);
+	-+general_bill(NB).
 
 +end_of_year : pld_bill(PB) & general_bill(GB) & variance(V) & demand(D) & estimative(E) & .my_name(Me) <-
 	.print(Me, " my variance was: ", V);

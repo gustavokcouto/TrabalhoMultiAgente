@@ -1,0 +1,95 @@
+[celesc] solar2, you generated 40 and sold 50 at month 12
+[celesc] normal_client3, you have to  pay 280 at month 12
+[celesc] solar1, you generated 40 and sold 50 at month 12
+[celesc] normal_client8, you consumed 47 bought 74 from local market and at month 12
+[celesc] normal_client7, you consumed 43 bought 35 from local market and 6 from national market at month 12
+[celesc] normal_client1, you consumed 38 bought 34 from national market at month 12
+[celesc] normal_client6, you consumed 39 bought 63 from national market at month 12
+[celesc] normal_client5, you consumed 32 bought 19 from local market at month 12
+[celesc] normal_client9, you consumed 30 bought 5 from local market at month 12
+[celesc] normal_client8, you will receive 1080 at month 12
+[celesc] normal_client2, you consumed 49 bought 53 from national market at month 12
+[celesc] normal_client7, you have to  pay 80 at month 12
+[celesc] eolica2, you generated 40 and sold 50 at month 12
+[celesc] normal_client1, you have to  pay 160 at month 12
+[celesc] normal_client6, you will receive 960 at month 12
+[celesc] normal_client5, you have to  pay 520 at month 12
+[celesc] normal_client9, you have to  pay 1000 at month 12
+[celesc] normal_client2, you will receive 160 at month 12
+[normal_client7] normal_client7 bought 6 for price 77 from celesc for month 12 in month 12
+[normal_client4] normal_client4 bought 66 for price 77 from celesc for month 12 in month 12
+[normal_client2] normal_client2 bought 53 for price 77 from celesc for month 12 in month 12
+[normal_client6] normal_client6 bought 63 for price 77 from celesc for month 12 in month 12
+[normal_client1] normal_client1 bought 34 for price 77 from celesc for month 12 in month 12
+[normal_client1] normal_client1 my variance was: 1.9033230874000613
+[normal_client5] normal_client5 my variance was: 2.281785303552425
+[normal_client1] normal_client1 my demand was: [35,40,33,42,32,46,46,46,41,47,41,38,34]
+[normal_client5] normal_client5 my demand was: [35,48,49,47,34,33,40,34,35,48,31,32,30]
+[normal_client7] normal_client7 my variance was: 0.24296284408263924
+[normal_client1] normal_client1 my prediction was: [51,27,41,25,23,40,45,31,47,45,28,34,41]
+[normal_client5] normal_client5 my prediction was: [44,70,29,30,55,36,48,16,22,55,38,19,32]
+[normal_client2] normal_client2 my variance was: 3.1619200358600934
+[normal_client4] normal_client4 my variance was: 2.0130409191180347
+[normal_client2] normal_client2 my demand was: [37,41,39,48,40,37,41,48,31,35,49,49,48]
+[normal_client4] normal_client4 my demand was: [42,41,44,32,42,36,30,46,43,47,46,49,39]
+[normal_client3] normal_client3 my variance was: 2.6132914068360975
+[normal_client7] normal_client7 my demand was: [30,43,43,46,35,34,48,36,37,47,32,43,41]
+[normal_client7] normal_client7 my prediction was: [30,42,43,44,33,32,48,34,39,47,31,41,39]
+[normal_client6] normal_client6 my variance was: 2.5599078845495598
+[normal_client3] normal_client3 my demand was: [33,30,48,30,40,40,46,42,48,36,49,39,33]
+[normal_client4] normal_client4 my prediction was: [58,34,44,31,42,17,47,52,30,37,27,66,24]
+[normal_client3] normal_client3 my prediction was: [36,48,59,16,38,27,37,23,34,32,72,32,45]
+[normal_client9] normal_client9 my variance was: 2.695600000039438
+[normal_client8] normal_client8 my variance was: 4.1048441762172985
+[normal_client8] normal_client8 my demand was: [32,48,49,46,41,36,42,36,37,31,38,47,45]
+[normal_client9] normal_client9 my demand was: [30,31,39,42,36,43,45,39,33,45,31,30,31]
+[normal_client8] normal_client8 my prediction was: [37,51,23,44,42,44,56,17,0,0,70,74,72]
+[normal_client9] normal_client9 my prediction was: [31,46,48,25,18,22,36,41,23,65,55,5,48]
+[normal_client2] normal_client2 my prediction was: [10,43,56,69,24,25,9,65,47,48,43,53,23]
+[normal_client10] normal_client10 my variance was: 2.1108912132603175
+[normal_client10] normal_client10 my demand was: [47,46,42,47,47,33,44,34,43,44,40,37,44]
+[normal_client10] normal_client10 my prediction was: [36,54,35,58,60,33,57,52,54,33,39,35,45]
+[normal_client6] normal_client6 my demand was: [34,35,39,30,32,40,30,34,30,44,49,39,40]
+[normal_client6] normal_client6 my prediction was: [37,24,18,31,8,61,21,10,48,35,74,63,17]
+[normal_client9] normal_client9 my PLD bill was: [46,495,738,-510,-1188,-1344,-441,100,-600,1880,1944,-1000]
+[normal_client1] normal_client1 my PLD bill was: [736,-429,656,-510,-594,-384,-49,-750,360,-188,-1053,-160]
+[normal_client9] normal_client9 my general bill was: [2449,250,3936,1875,1260,660,734,1640,1334,2340,2726,200]
+[normal_client1] normal_client1 my general bill was: [199,540,1086,750,1610,750,1800,1643,1410,1280,840,2618]
+[normal_client2] normal_client2 my PLD bill was: [-1242,66,1394,630,-1056,-768,-1568,850,960,1222,-486,160]
+[normal_client2] normal_client2 my general bill was: [790,530,4592,1640,1680,1000,738,3445,1470,3744,2838,4081]
+[normal_client6] normal_client6 my PLD bill was: [138,-363,-1722,30,-1584,1344,-441,-1200,1080,-846,2025,960]
+[normal_client6] normal_client6 my general bill was: [2923,720,720,2325,560,4514,1722,400,1842,2730,1430,4851]
+[normal_client3] normal_client3 my PLD bill was: [138,594,902,-420,-132,-832,-441,-950,-840,-376,1863,-280]
+[normal_client3] normal_client3 my general bill was: [220,4080,2040,1200,2660,1084,3034,1219,1020,1280,4752,930]
+[normal_client7] normal_client7 my PLD bill was: [0,-33,0,-60,-132,-128,0,-100,120,0,-81,-80]
+[normal_client7] normal_client7 my general bill was: [1200,3570,3526,1320,390,2368,1440,1020,1560,690,2046,1764]
+[normal_client5] normal_client5 my PLD bill was: [414,726,-1640,-510,1386,192,392,-900,-780,658,567,-520]
+[normal_client5] normal_client5 my general bill was: [3476,2080,2378,2250,2350,1240,3936,848,1276,4290,2508,760]
+[normal_client10] normal_client10 my PLD bill was: [-506,264,-574,330,858,0,637,900,660,-1034,-81,-80]
+[normal_client4] normal_client4 my PLD bill was: [736,-231,0,-30,0,-1216,833,300,-780,-940,-1539,680]
+[normal_client10] normal_client10 my general bill was: [1080,4590,900,4350,1670,2442,4674,1104,3132,2574,1170,1050]
+[normal_client8] normal_client8 my PLD bill was: [230,99,-2132,-60,66,512,686,-950,-2220,-2914,2592,1080]
+[normal_client4] normal_client4 my general bill was: [1530,1020,1380,1020,1260,510,1410,1740,1740,1110,1782,5082]
+[normal_client8] normal_client8 my general bill was: [840,4335,690,1030,950,1170,860,844,0,0,1086,1980]
+
+[normal_client9] normal_client9 my general bill was: [2449,250,3936,1875,1260,660,734,1640,1334,2340,2726,200]
+[normal_client1] normal_client1 my general bill was: [199,540,1086,750,1610,750,1800,1643,1410,1280,840,2618]
+[normal_client2] normal_client2 my general bill was: [790,530,4592,1640,1680,1000,738,3445,1470,3744,2838,4081]
+[normal_client6] normal_client6 my general bill was: [2923,720,720,2325,560,4514,1722,400,1842,2730,1430,4851]
+[normal_client3] normal_client3 my general bill was: [220,4080,2040,1200,2660,1084,3034,1219,1020,1280,4752,930]
+[normal_client7] normal_client7 my general bill was: [1200,3570,3526,1320,390,2368,1440,1020,1560,690,2046,1764]
+[normal_client5] normal_client5 my general bill was: [3476,2080,2378,2250,2350,1240,3936,848,1276,4290,2508,760]
+[normal_client10] normal_client10 my general bill s: [1080,4590,900,4350,1670,2442,4674,1104,3132,2574,1170,1050]
+[normal_client4] normal_client4 my general bill was: [1530,1020,1380,1020,1260,510,1410,1740,1740,1110,1782,5082]
+[normal_client8] normal_client8 my general bill was: [840,4335,690,1030,950,1170,860,844,0,0,1086,1980]
+
+ [2449,250,3936,1875,1260,660,734,1640,1334,2340,2726,200],
+ [199,540,1086,750,1610,750,1800,1643,1410,1280,840,2618],
+ [790,530,4592,1640,1680,1000,738,3445,1470,3744,2838,4081],
+ [2923,720,720,2325,560,4514,1722,400,1842,2730,1430,4851],
+ [220,4080,2040,1200,2660,1084,3034,1219,1020,1280,4752,930],
+ [1200,3570,3526,1320,390,2368,1440,1020,1560,690,2046,1764],
+ [3476,2080,2378,2250,2350,1240,3936,848,1276,4290,2508,760],
+ [1080,4590,900,4350,1670,2442,4674,1104,3132,2574,1170,1050],
+ [1530,1020,1380,1020,1260,510,1410,1740,1740,1110,1782,5082],
+ [840,4335,690,1030,950,1170,860,844,0,0,1086,1980],

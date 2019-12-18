@@ -123,6 +123,7 @@ price(_, 100).
 	.send(Ag, tell, receive(M, (E - X) * PLD)).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy_report(Ag, M, E) & E == X <- 
+	.send(Ag,tell, receive(M, 0));
     .print(Ag, ", you consumed ", X, " bought ", E, " from local market and at month ", M).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, P, D)[source(Ag)] & D<X <-
@@ -139,7 +140,7 @@ price(_, 100).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) & buy(Ag, M, P, D)[source(Ag)] & D==X <- 
     .print(Ag, ", you consumed ", X, " bought ", D, " from national market at month ", M);
-	.send(Ag, tell, buy_success(M, Pn, D));
+	.send(Ag, tell, pay_order(M, 0));
 	!send_consumer_bill(Ag, M, D).
 
 +consumi(Ag, M, X)[source(Ag)]: month(M) & pld(PLD) <-
